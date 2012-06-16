@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module>
-  <!-- Inherit our applications main module.                      -->
-  <inherits name='br.com.mr.websocket.WebSocket4Gwt'/>
-
-  <!-- Specify the path to any remote services.                   -->
-  <servlet path="/websocket4gwt/greet" class="br.com.mr.websocket.server.GreetingServiceImpl" />
-
-</module>

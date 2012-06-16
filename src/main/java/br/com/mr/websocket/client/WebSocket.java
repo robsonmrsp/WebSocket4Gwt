@@ -74,7 +74,14 @@ public class WebSocket extends JavaScriptObject {
 		return this.url;
 	}-*/;
 
-	public final native boolean send(String data) /*-{
+	public boolean send(String data) throws IncorrectStateException{
+		if(getReadyState() != OPEN){
+			throw new IncorrectStateException("Be Sure connected [ URL: " +getURL()+",state: "+getReadyState()+" ]");
+		}
+		return send(data);
+	}
+		
+	private final native boolean _send(String data) /*-{
 		return this.send(data);
 	}-*/;
 
@@ -95,7 +102,7 @@ public class WebSocket extends JavaScriptObject {
 
 	public native void setCloseHandler(CloseHandler handler)/*-{
 		var that = this;
-		this.onopen = function(e) {
+		this.onclose = function(e) {
 			handler.@br.com.mr.websocket.client.handles.CloseHandler::onClose(Lbr/com/mr/websocket/client/WebSocket;Lbr/com/mr/websocket/client/events/CloseEvent;)(that, e);
 		};
 	}-*/;
@@ -109,7 +116,7 @@ public class WebSocket extends JavaScriptObject {
 
 	public native void setMessageHandler(MessageHandler handler)/*-{
 		var that = this;
-		this.onopen = function(e) {
+		this.onmessage = function(e) {
 			handler.@br.com.mr.websocket.client.handles.MessageHandler::onMessage(Lbr/com/mr/websocket/client/WebSocket;Lbr/com/mr/websocket/client/events/MessageEvent;)(that, e);
 		};
 	}-*/;

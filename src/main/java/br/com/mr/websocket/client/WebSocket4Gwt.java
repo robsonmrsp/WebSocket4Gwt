@@ -19,7 +19,7 @@ public class WebSocket4Gwt implements EntryPoint {
 		webSocket.setCloseHandler(new CloseHandler() {
 			@Override
 			public void onClose(WebSocket webSocket, CloseEvent closeEvent) {
-				System.out.println("WebSocket4Gwt.onModuleLoad().new CloseHandler() {...}.onClose()");
+				
 			}
 		});
 
@@ -37,7 +37,11 @@ public class WebSocket4Gwt implements EntryPoint {
 			}
 		});
 		
-		webSocket.send("Olá do outro lado");
+		try {
+			webSocket.send("Ola do outro lado");
+		} catch (IncorrectStateException e) {
+			e.printStackTrace();
+		}
 		
 	}
 }
